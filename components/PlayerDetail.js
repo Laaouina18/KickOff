@@ -14,13 +14,13 @@ export default function PlayerDetail({ route }) {
     <View >
       <ScrollView style={styles.playerDetails} contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.playerContainer}>
-        <Image source={{uri : player.team_picture}} blurRadius={1} style={styles.teamPicture}/>
-        
+        {/* <Image source={{uri : player.team_picture}} blurRadius={1} style={styles.teamPicture}/>
+         */}
         <Text style={styles.playerName}>{player.player_name}</Text>
-        <Image
+        {/* <Image
           source={{uri : player.player_picture}}
           style={{width : 200, aspectRatio: 1, backgroundColor : 'white', borderRadius : 100}}
-        />
+        /> */}
       </View>
         <View style={{marginBottom : 20}}>
           <Text style={{fontSize : 20, fontWeight : '700'}}>Player Details</Text>
@@ -36,7 +36,7 @@ export default function PlayerDetail({ route }) {
               {
                 player.position_short_name.split(",").map((position, index) => (
                   <Text key={index} style={{fontSize : 25, fontWeight : '600'}}>
-                    {position.trim()}
+                    jkjf
                   </Text>
                 ))
               }

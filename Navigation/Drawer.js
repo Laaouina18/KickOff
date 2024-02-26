@@ -2,9 +2,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
-import Matchs from '../screens/Matchs';
-import Players from '../screens/Players';
-import Favoris from '../screens/Favoris';
+import Matchs from '../screens/MatchScreen';
+import Players from '../screens/PlayerScreen';
+import Favoris from '../screens/FavoriteScreen';
 export default function Drawer({ navigation }) {
     const Drawer = createDrawerNavigator();
     return (

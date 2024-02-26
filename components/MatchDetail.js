@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet, View, Image, Pressable } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { favoriteMatch } from '../redux/matchs/actions'
+import { favoriteMatch } from '../redux/Actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -12,18 +12,18 @@ export default function MatchDetail() {
       <View >
         <View style={styles.cardContainer}>
           <View style={styles.cardView}>
-            <Image style={styles.matchImage} source={{ uri: '' }} />
+            {/* <Image style={styles.matchImage} source={{ uri: '' }} /> */}
             <Text style={styles.secondClub}>name</Text>
 
           </View>
           <Text>VS</Text>
           <View style={styles.cardView}>
             <Image style={styles.matchImage} source={{ uri: 'ht' }} />
-            <Text style={styles.firstClub}>{match.homeTeam.name}</Text>
+            <Text style={styles.firstClub}>match.homeTeam.name</Text>
           </View>
         </View>
         <View style={styles.cardFooter}>
-          <Image style={styles.matchImageFlug} source={{ uri: 'https://api.sofascore.app/api/v1/unique-tournament/' + match.tournament.uniqueTournament.id + '/image' }} />
+          {/* <Image style={styles.matchImageFlug} source={{ uri: 'https://api.sofascore.app/api/v1/unique-tournament/' + match.tournament.uniqueTournament.id + '/image' }} /> */}
           <Text style={styles.dateMatch}>date</Text>
           <Text style={styles.timeMatch}>time</Text>
           <View style={styles.cardViewSlug}>

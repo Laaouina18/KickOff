@@ -6,14 +6,14 @@ const PlayerCard = ({ player}) => {
   const navigation = useNavigation()
   return (
     <Pressable onPress={()=>navigation.navigate('player',{player})}  style={({pressed}) => [{backgroundColor : pressed ? "#c2c1c1" : 'white'}, styles.container]}>
-      <Image source={{uri:player.team_picture}} style={styles.flag}/>
+      {/* <Image source={{uri:player.team_picture}} style={styles.flag}/> */}
       <View style={styles.playerInfo}>
         <Text style={styles.playerName}>{player.player_name}</Text>
         <Text style={{color : '#242323', fontSize : 18, fontWeight: '600'}}>Age:player.age</Text>
         
       </View>
       <View style={styles.playerPicture}>
-        <Image source={{uri:'player.player_picture'}}  style={{width : 140, height : 150}}/>
+        {/* <Image source={{uri:'player.player_picture'}}  style={{width : 140, height : 150}}/> */}
       </View>
     </Pressable>
   )

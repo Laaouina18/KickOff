@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
 import { format } from 'date-fns'
 import { useDispatch } from 'react-redux'
-import { favoriteMatch } from '../redux/matchs/actions'
+import { favoriteMatch } from '../redux/Actions'
 import { useSelector } from 'react-redux'
 const MatchItem = ({match}) => {
   const dispatch = useDispatch()
@@ -24,20 +24,20 @@ const MatchItem = ({match}) => {
           <View
           style={{alignItems:'center'}}
           >
-            <Image
+            {/* <Image
               source={{ uri: '' }}
               style={styles.teamImg}
-            />
+            /> */}
             <Text style={styles.text}>match</Text>
           </View>
           <Text style={styles.text}>VS</Text>
           <View 
           style={{alignItems:'center'}}
           >
-            <Image
+            {/* <Image
               source={{ uri: '' }}
               style={styles.teamImg}
-            />
+            /> */}
             <Text style={styles.text}>match.awayTeam.name</Text>
           </View>
         </View>
@@ -45,7 +45,7 @@ const MatchItem = ({match}) => {
         <View style={styles.calendar}>
           <View style={{ flexDirection: 'row', gap: 5 }}>
             <Icon name='calendar' color={'white'} size={20} />
-            <Text style={styles.text}>format(new Date(match.startTimestamp*1000), "yyyy-MM-dd")</Text>
+            <Text style={styles.text}>DJKFJ</Text>
           </View>
           <View style={{ flexDirection: 'row', gap: 5 }}>
             <Pressable onPress={() => addTofavorite()}>
@@ -54,7 +54,7 @@ const MatchItem = ({match}) => {
           </View>
           <View style={{ flexDirection: 'row', gap: 5 }}>
             <Icon name='time' color={'white'} size={20} />
-            <Text style={styles.text}>format(new Date(match.startTimestamp*1000), "HH-mm")</Text>
+            <Text style={styles.text}>RHJR</Text>
           </View>
         </View>
       </View>
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default MatchCard
+export default MatchItem
