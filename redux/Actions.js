@@ -6,11 +6,13 @@ import {
 	FETCH_TOURNAMENTS
   } from './ActionsTypes';
   
+  import axios from 'axios';
 
   export const fetchPlayers = () => {
 	return async (dispatch) => {
         try {
             const res = await  axios.get('https://www.footballtransfers.com/en/players/actions/overview/overview')
+			
             dispatch({ type: FETCH_PLAYERS, payload: res.data.records });
         } catch (error) {
             console.error(error);
@@ -22,7 +24,9 @@ export const  FectchTournaments=()=>{
 	return async (dispatch) => {
 	  try {
 		const res= await axios.get('https://api.sofascore.com/api/v1/config/top-unique-tournaments/MA/football');
+	
 		dispatch({ type: FETCH_TOURNAMENTS, payload: res.data.uniqueTournaments });
+		
 	  } catch (error) {
 		console.error(error);
 	  }
@@ -46,9 +50,12 @@ export const  FectchTournaments=()=>{
 
 
   
-  export const saveMatchToFavorites = (match) => ({
+export const saveMatchToFavorites = (match) => {
+	console.log(match);
+	return {
 	type: SAVE_MATCH_TO_FAVORITES,
 	payload: match
-  });
+  }
+}
  
   
