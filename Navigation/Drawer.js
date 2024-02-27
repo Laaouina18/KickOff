@@ -10,7 +10,7 @@ export default function Drawer({ navigation }) {
     return (
         <Drawer.Navigator screenOptions={{
             headerStyle: {
-                backgroundColor: 'green',
+                backgroundColor: 'purple',
             },
             headerRightContainerStyle: {
                 paddingRight: 10
@@ -20,7 +20,7 @@ export default function Drawer({ navigation }) {
             <Drawer.Screen options={{
                 title: 'Matchs',
                 headerStyle: {
-                    backgroundColor: 'green'
+                    backgroundColor: 'purple'
                 },
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
@@ -32,7 +32,7 @@ export default function Drawer({ navigation }) {
             <Drawer.Screen options={{
                 title: 'Players',
                 headerStyle: {
-                    backgroundColor: 'green'
+                    backgroundColor: 'purple'
                 },
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
@@ -44,7 +44,7 @@ export default function Drawer({ navigation }) {
             <Drawer.Screen options={{
                 title: 'Favoris',
                 headerStyle: {
-                    backgroundColor: 'green'
+                    backgroundColor: 'purple'
                 },
                 headerTitleAlign: 'center',
                 headerTitleStyle: {

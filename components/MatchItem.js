@@ -3,59 +3,44 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
 import { format } from 'date-fns'
-import { useDispatch } from 'react-redux'
-import { favoriteMatch } from '../redux/Actions'
-import { useSelector } from 'react-redux'
-const MatchItem = ({match}) => {
-  const dispatch = useDispatch()
-  const navigation = useNavigation()
+import { useDispatch, useSelector } from 'react-redux'
+import { saveMatchToFavorites } from '../redux/Actions'
 
-  
+const MatchItem = (props) => {
+  const dispatch = useDispatch()
+  const match = props.match
+  const navigation = useNavigation()
+  const favorites = useSelector(state => state.favorites)
+
+  const addToFavorites = (match) => {
+    dispatch(saveMatchToFavorites(match))
+  }
+
   return (
-    <Pressable style={{height: 200}}
-     onPress={() => navigation.navigate('match', { match })}
-     >
-      <View style={styles.container}>
-        <View style={{ flex: 1, flexDirection: 'row', gap: 10, justifyContent: 'center' }}>
-          
-          <Text style={styles.text}>match.tournament.name</Text>
-        </View>
-        <View style={styles.cardMatch}>
-          <View
-          style={{alignItems:'center'}}
-          >
-            {/* <Image
-              source={{ uri: '' }}
-              style={styles.teamImg}
-            /> */}
-            <Text style={styles.text}>match</Text>
+    <Pressable style={styles.container} onPress={() => navigation.navigate('matchDetail', { match })}>
+      <View style={styles.wrapper}>
+        <Text style={styles.tournament}>{match.tournament.name}</Text>
+        <View style={styles.matchCard}>
+          <View style={styles.teamContainer}>
+            <Image source={{ uri: 'https://api.sofascore.app/api/v1/team/' + match.homeTeam.id + '/image' }} style={styles.teamImg} />
+            <Text style={styles.teamName}>{match.homeTeam.name}</Text>
           </View>
-          <Text style={styles.text}>VS</Text>
-          <View 
-          style={{alignItems:'center'}}
-          >
-            {/* <Image
-              source={{ uri: '' }}
-              style={styles.teamImg}
-            /> */}
-            <Text style={styles.text}>match.awayTeam.name</Text>
+          <Text style={styles.vsText}>VS</Text>
+          <View style={styles.teamContainer}>
+            <Image source={{ uri: 'https://api.sofascore.app/api/v1/team/'+match.awayTeam.id+'/image' }} style={styles.teamImg} />
+            <Text style={styles.teamName}>{match.awayTeam.name}</Text>
           </View>
         </View>
-        <View style={styles.hr}></View>
-        <View style={styles.calendar}>
-          <View style={{ flexDirection: 'row', gap: 5 }}>
-            <Icon name='calendar' color={'white'} size={20} />
-            <Text style={styles.text}>DJKFJ</Text>
+        <View style={styles.footer}>
+          <View style={styles.dateTimeContainer}>
+            <Icon name='calendar' color={'#4CAF50'} size={20} />
+            <Text style={styles.dateTimeText}>{format(new Date(match.startTimestamp*1000), "yyyy-MM-dd")}</Text>
+            <Icon name='time' color={'#FFEB3B'} size={20} />
+            <Text style={styles.dateTimeText}>{format(new Date(match.startTimestamp*1000), "HH-mm")}</Text>
           </View>
-          <View style={{ flexDirection: 'row', gap: 5 }}>
-            <Pressable onPress={() => addTofavorite()}>
-             <Icon name='heart' color={'red'} size={40} /> :<Icon name='heart' color={'white'} size={40} />
-            </Pressable>
-          </View>
-          <View style={{ flexDirection: 'row', gap: 5 }}>
-            <Icon name='time' color={'white'} size={20} />
-            <Text style={styles.text}>RHJR</Text>
-          </View>
+          <Pressable onPress={() => addToFavorites(match)} style={styles.favoriteButton}>
+            <Icon name='heart' color={favorites.includes(match) ? '#FF5722' : '#2196F3'} size={30} />
+          </Pressable>
         </View>
       </View>
     </Pressable>
@@ -64,39 +49,60 @@ const MatchItem = ({match}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    gap: 20,
-    backgroundColor: 'black',
-    padding: 20,
-    borderRadius: 20,
+    backgroundColor: 'purple',
+	borderRadius:10,
+    margin: 10,
+    padding: 15,
   },
-  cardMatch: {
+  wrapper: {
     flex: 1,
+  },
+  tournament: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  matchCard: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    paddingBottom:20
+    marginBottom: 10,
   },
-  text: {
-    color: 'white',
-    fontSize: 15,
-    
+  teamContainer: {
+    alignItems: 'center',
   },
   teamImg: {
     width: 60,
     height: 60,
   },
-  hr: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '100%',
-    height: 1,
-    backgroundColor: 'white',
+  teamName: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    marginTop: 5,
   },
-  calendar: {
+  vsText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+  },
+  footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+    alignItems: 'center',
+  },
+  dateTimeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dateTimeText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    marginLeft: 5,
+  },
+  favoriteButton: {
+    padding: 5,
+    borderRadius: 5,
+  },
 })
 
 export default MatchItem

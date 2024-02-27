@@ -4,7 +4,7 @@ import Drawer from './Drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Player from '../components/PlayerDetail';
-import Match from '../components/MatchDetail';
+import MatchDetail from '../components/MatchDetail';
 import PlayerDetail from '../components/PlayerDetail';
 export default function MainStack() {
   const Stack = createStackNavigator();
@@ -14,7 +14,7 @@ export default function MainStack() {
       <Stack.Screen name="Drawer" component={Drawer} options={{ headerShown: false }} />
       <Stack.Screen options={() => ({
         headerStyle: {
-          backgroundColor: 'green',
+          backgroundColor: 'purple',
         },
 
         headerTintColor: '#fff',
@@ -23,11 +23,11 @@ export default function MainStack() {
         }
       })}
 
-        name="match" component={Match} />
+        name="matchDetail" component={MatchDetail} />
       <Stack.Screen options={() => ({
        
         headerStyle: {
-          backgroundColor: 'green'
+          backgroundColor: 'purple'
         },
         headerTitleAlign: 'center',
         headerTitleStyle: {
