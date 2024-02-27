@@ -1,49 +1,56 @@
 import React from 'react'
 import { Text, StyleSheet, View, Image, Pressable } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { favoriteMatch } from '../redux/Actions'
 import { useDispatch, useSelector } from 'react-redux'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { saveMatchToFavorites } from '../redux/Actions'
 
 
 
-export default function MatchDetail() {
+export default function MatchDetail({ route}) {
+
+  const favoris = useSelector(state => state.favorites)
+const match=route.params.match;
+  const dispatch = useDispatch()
+  function addTofavorite() {
+    dispatch(saveMatchToFavorites(match))
+  }
   return (
     <View style={styles.root}>
-      <View >
+      <View key={match.id}>
         <View style={styles.cardContainer}>
           <View style={styles.cardView}>
-            {/* <Image style={styles.matchImage} source={{ uri: '' }} /> */}
-            <Text style={styles.secondClub}>name</Text>
+            <Image style={styles.matchImage} source={{ uri: 'https://api.sofascore.app/api/v1/team/' + match.awayTeam.id + '/image' }} />
+            <Text style={styles.secondClub}>{match.awayTeam.name}</Text>
 
           </View>
           <Text>VS</Text>
           <View style={styles.cardView}>
-            <Image style={styles.matchImage} source={{ uri: 'ht' }} />
-            <Text style={styles.firstClub}>match.homeTeam.name</Text>
+            <Image style={styles.matchImage} source={{ uri: 'https://api.sofascore.app/api/v1/team/' + match.homeTeam.id + '/image' }} />
+            <Text style={styles.firstClub}>{match.homeTeam.name}</Text>
           </View>
         </View>
         <View style={styles.cardFooter}>
-          {/* <Image style={styles.matchImageFlug} source={{ uri: 'https://api.sofascore.app/api/v1/unique-tournament/' + match.tournament.uniqueTournament.id + '/image' }} /> */}
-          <Text style={styles.dateMatch}>date</Text>
-          <Text style={styles.timeMatch}>time</Text>
+          <Image style={styles.matchImageFlug} source={{ uri: 'https://api.sofascore.app/api/v1/unique-tournament/' + match.tournament.uniqueTournament.id + '/image' }} />
+          <Text style={styles.dateMatch}>{new Date(match.startTimestamp * 1000).toLocaleDateString()}</Text>
+          <Text style={styles.timeMatch}>{new Date(match.startTimestamp * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
           <View style={styles.cardViewSlug}>
-            <Text style={styles.matchName}>slug</Text>
+            <Text style={styles.matchName}>{match.slug}</Text>
           </View>
 
 
         </View>
         <View style={styles.cardScore}>
-          <Text style={styles.homeScoreText} >homeScoreText</Text>
-          <Text style={styles.awayScoreText}>awayScoreText</Text>
-          <Pressable  style={{
+          <Text style={styles.homeScoreText} >{match.homeScore.normaltime}</Text>
+          <Text style={styles.awayScoreText}>{match.awayScore.normaltime}</Text>
+          <Pressable onPress={() => addTofavorite()} style={{
             borderColor:'black',
             borderWidth:2
           }}>
-           <Icon name='heart' color={'red'} size={40} /> : <Icon name='heart' color={'white'} size={40}  />
+            {favoris.includes(match) ? <Icon name='heart' color={'red'} size={40} /> : <Icon name='heart' color={'white'} size={40}  />}
           </Pressable>
         </View>
         <View style={styles.cardViewFlug}>
-          <Text style={styles.matchCategoryName}>tourn.cat</Text>
+          <Text style={styles.matchCategoryName}>{match.tournament.category.name}</Text>
         </View>
       </View>
     </View>
